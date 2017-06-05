@@ -1,0 +1,47 @@
+{
+    "name": "iuravic/duktig-skeleton-web-app",
+    "type": "library",
+    "authors": [
+        {"name": "Ivan Uravić", "email": "iuravic@gmail.com"}
+    ],
+    "license": ["MIT"],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1",
+        "iuravic/duktig-core": "dev-master",
+        "psr/http-message": "^1.0",
+        "http-interop/http-factory": "dev-master",
+        "psr/log": "^1.0",
+        "http-interop/http-middleware": "^0.4.1",
+        "psr/container": "^1.0",
+        "iuravic/duktig-auryn-adapter": "dev-master",
+        "rdlowrey/auryn": "^1.4",
+        "elazar/auryn-container-interop": "^2.0",
+        "container-interop/container-interop": "^1.1",
+        "iuravic/duktig-http-factory-guzzle-adapter": "dev-master",
+        "guzzlehttp/psr7": "^1.4",
+        "iuravic/duktig-middleman-adapter": "dev-master",
+        "mindplay/middleman": "3.0.0.x-dev",
+        "iuravic/duktig-symfony-event-dispatcher-adapter": "dev-master",
+        "symfony/event-dispatcher": "^3.2",
+        "iuravic/duktig-symfony-router-adapter": "dev-master",
+        "symfony/routing": "^3.2",
+        "iuravic/duktig-twig-renderer-adapter": "dev-master",
+        "twig/twig": "^1.31",
+        "monolog/monolog": "^1.22"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.1",
+        "mockery/mockery": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "DuktigSkeleton\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DuktigSkeleton\\": "tests/functional/"
+        }
+    }
+}
