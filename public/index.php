@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/../../../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 $app = (new \Duktig\Core\AppFactory)->make(
     __DIR__.'/../src/Config/config.php',
