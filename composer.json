@@ -13,7 +13,7 @@
         "iuravic/duktig-http-factory-guzzle-adapter": "dev-master",
         "iuravic/duktig-symfony-router-adapter": "dev-master",
         "iuravic/duktig-middleman-adapter": "dev-master",
-        "iuravic/duktig-twig-renderer-adapter": "dev-master",
+        "iuravic/duktig-twig-adapter": "dev-master",
         "monolog/monolog": "^1.22",
         "psr/http-message": "^1.0",
         "psr/log": "^1.0",
