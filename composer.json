@@ -1,10 +1,26 @@
 {
     "name": "iuravic/duktig-skeleton-web-app",
     "type": "library",
-    "authors": [
-        {"name": "Ivan Uravić", "email": "iuravic@gmail.com"}
+    "description": "Skeleton web application with Duktig MVC micro web framework for PHP 7.1",
+    "keywords": [
+        "Duktig",
+        "PHP",
+        "MVC",
+        "web",
+        "framework",
+        "micro framework",
+        "skeleton"
     ],
-    "license": ["MIT"],
+    "homepage": "https://github.com/iuravic/duktig-skeleton-web-app",
+    "license": [
+        "MIT"
+    ],
+    "authors": [
+        {
+            "name": "Ivan Uravić",
+            "email": "iuravic@gmail.com"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
