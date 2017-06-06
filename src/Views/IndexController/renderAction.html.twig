@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1>IndexController::indexAction</h1>
+    <p>twig template: indexAction.html.twig</p>
+    <p>clientIP: {{ clientIP }}</p>
+    <p>URI params: 
+        <ul>
+        {% if uriParamsArr %}
+            {% for key,value in uriParamsArr %}
+            <li>'{{ value }}'</li>
+            {% endfor %}
+        {% else %}
+            <li>none</li>
+        {% endif %}
+        </ul>
+    </p>
+    <p>query params: 
+        <ul>
+        {% if queryParamsArr %}
+            {% for key,value in queryParamsArr %}
+            <li>'{{ key }}'='{{ value }}'</li>
+            {% endfor %}
+        {% else %}
+            <li>none</li>
+        {% endif %}
+        </ul>
+    </p>
+{% endblock %}

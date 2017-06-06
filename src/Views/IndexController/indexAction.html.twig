@@ -5,21 +5,5 @@
 {% endblock %}
 
 {% block body %}
-    <h1>IndexController::indexAction</h1>
-    <p>twig template: indexAction.html.twig</p>
-    <p>clientIP: {{ clientIP }}</p>
-    <p>URI params: 
-        <ul>
-        {% for key,value in uriParamsArr %}
-            <li>'{{ value }}'</li>
-        {% endfor %}
-        </ul>
-    </p>
-    <p>query params: 
-        <ul>
-        {% for key,value in queryParamsArr %}
-            <li>'{{ key }}'='{{ value }}'</li>
-        {% endfor %}
-        </ul>
-    </p>
+    <p>It works!</p>
 {% endblock %}

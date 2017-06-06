@@ -33,16 +33,31 @@ class IndexController extends BaseController
     }
     
     /**
+     * 'It works!' landing page
+     * 
+     * @return ResponseInterface
+     */
+    public function indexAction() : ResponseInterface
+    {
+        $html = $this->render([
+            'title' => 'Welcome indexAction'
+        ]);
+        $this->writeResponseBody($html);
+        
+        return $this->response;
+    }
+    
+    /**
      * Simple example returning a rendered template
      * 
      * @param string $slug
      * @return ResponseInterface
      */
-    public function indexAction(string $slug) : ResponseInterface
+    public function renderAction(string $slug) : ResponseInterface
     {
         $html = $this->render([
             'title' => 'Sample page indexAction',
-            'uriParamsArr' => [$slug],
+            'uriParamsArr' => !empty($slug) ? [$slug] : [],
             'queryParamsArr' => $this->getQueryParams(),
             'clientIP' => $this->request->getAttribute('clientIP'),
         ]);

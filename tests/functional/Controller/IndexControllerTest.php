@@ -27,6 +27,16 @@ class IndexControllerTest extends TestCase
         unset($this->app);
     }
     
+    public function testGetsLandingPage()
+    {
+        $response = $this->getResponseFromRoute('/');
+        $html = $response->getBody()->__toString();
+        $this->assertEquals(200, $response->getStatusCode(),
+            "Response does not have the expected status code");
+        $this->assertRegExp("/.*It works!.*/s", $html,
+            "Response body does not contain the expected expression");
+    }
+    
     public function testGetsResponseFromRouteWithControllerAndDI()
     {
         $response = $this->getResponseFromRoute('/example-controller-action/uri-param-name');

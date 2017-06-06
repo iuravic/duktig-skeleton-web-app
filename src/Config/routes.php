@@ -3,18 +3,14 @@
  * Your app's route definitions, see Core/routes.php.
  */
 return [
-    'example-route-with-callable-handler' => [
-        'path' => '/example-callable-handler{trailingSlash}',
+    'landing-page' => [
+        'path' => '{trailingSlash}',
         'params_defaults' => [],
         'params_requirements' => [
             'trailingSlash' => '/?',
         ],
-        'handler' => function (\Interop\Http\Factory\ResponseFactoryInterface $responseFactory) {
-            $response = $responseFactory->createResponse();
-            $response->getBody()->write('Response set by a callable route handler');
-            return $response;
-        },
-        'handler_method' => null,
+        'handler' => \DuktigSkeleton\Controller\IndexController::class,
+        'handler_method' => 'indexAction',
         'options' => [],
         'host' => '',
         'schemes' => [],
@@ -28,7 +24,7 @@ return [
             'myParam' => '.*',
         ],
         'handler' => \DuktigSkeleton\Controller\IndexController::class,
-        'handler_method' => 'indexAction',
+        'handler_method' => 'renderAction',
         'options' => [],
         'host' => '',
         'schemes' => [],
@@ -49,4 +45,22 @@ return [
         'methods' => ['GET'],
         'middlewares' => [],
     ],
+    'example-route-with-callable-handler' => [
+        'path' => '/example-callable-handler{trailingSlash}',
+        'params_defaults' => [],
+        'params_requirements' => [
+            'trailingSlash' => '/?',
+        ],
+        'handler' => function (\Interop\Http\Factory\ResponseFactoryInterface $responseFactory) {
+            $response = $responseFactory->createResponse();
+            $response->getBody()->write('Response set by a callable route handler');
+            return $response;
+        },
+        'handler_method' => null,
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'methods' => ['GET'],
+        'middlewares' => [],
+    ]
 ];
