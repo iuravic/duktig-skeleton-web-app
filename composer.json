@@ -31,7 +31,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DuktigSkeleton\\": "tests/functional/"
+            "DuktigSkeleton\\": "tests/functional/",
+            "Duktig\\Test\\":  "vendor/iuravic/duktig-core/tests/"
         }
     }
 }
