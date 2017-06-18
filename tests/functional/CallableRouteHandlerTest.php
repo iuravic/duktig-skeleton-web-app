@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Duktig\Core\AppFactory;
 use Duktig\Core\App;
 use Duktig\Http\Factory\Adapter\Guzzle\GuzzleServerRequestFactory;
+use Duktig\Test\AppTesting;
 
 class CallableRouteHandlerTest extends TestCase
 {
@@ -13,7 +14,7 @@ class CallableRouteHandlerTest extends TestCase
         parent::setUp();
         $this->app = (new AppFactory())->make(
             __DIR__.'/../../src/Config/config.php',
-            App::class
+            AppTesting::class
         );
     }
     
@@ -23,14 +24,16 @@ class CallableRouteHandlerTest extends TestCase
         unset($this->app);
     }
     
+    /**
+     * Test without output buffering
+     *
+     * @disallowTestOutput
+     */
     public function testGetsResponseFromRouteWithACallableHandler()
     {
         $request = $this->getRequest('/example-callable-handler');
         $this->app->run($request);
-        $html = $this->app->getResponse()->getBody()->__toString();
-        $this->assertContains('Response set by a callable route handler', $html,
-            "Response body does not contain the expected expression"
-        );
+        $this->expectOutputRegex('/Response set by a callable route handler/');
     }
     
     private function getRequest($uri, $method = 'GET')

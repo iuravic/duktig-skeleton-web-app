@@ -63,9 +63,7 @@ class IndexControllerTest extends TestCase
         $this->mockExampleIPService([
             ['shouldReceive' => 'getClientIP', 'andReturn' => '176.64.10.11']
         ]);
-        
-        $request = $this->getRequest('/example-controller-action/uri-param-name');
-        $response = $this->app->run($request)->getResponse();
+        $response = $this->getResponseFromRoute('/example-controller-action/uri-param-name');
         $this->assertContains('clientIP: 176.64.10.11',
             $response->getBody()->__toString(),
             "Response body does not contain the expected expression"
@@ -82,9 +80,9 @@ class IndexControllerTest extends TestCase
             'with' => "Client with IP 176.64.10.12 accessed the page.",
             'times' => 1]
         ]);
+
+        $response = $this->getResponseFromRoute('/example-ip-check');
         
-        $request = $this->getRequest('/example-ip-check');
-        $response = $this->app->run($request)->getResponse();
         $this->assertContains(
             'Your IP is within the specified range and you can view this content.',
             $response->getBody()->__toString(),
@@ -98,8 +96,8 @@ class IndexControllerTest extends TestCase
             ['shouldReceive' => 'getClientIP', 'andReturn' => '1.2.3.4']
         ]);
         
-        $request = $this->getRequest('/example-ip-check');
-        $response = $this->app->run($request)->getResponse();
+        $response = $this->getResponseFromRoute('/example-ip-check');
+        
         $this->assertEquals(302, $response->getStatusCode(),
             "Response body does not have the expected status code"
         );
@@ -117,7 +115,9 @@ class IndexControllerTest extends TestCase
     private function getResponseFromRoute($uri)
     {
         $request = $this->getRequest($uri);
+        ob_start();
         $this->app->run($request);
+        ob_end_clean();
         return $this->app->getResponse();
     }
     
