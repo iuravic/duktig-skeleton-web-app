@@ -52,6 +52,7 @@ Project | Adapter package
 [Guzzle HTTP messages](https://github.com/guzzle/psr7) | [`duktig-http-factory-guzzle-adapter`](https://github.com/iuravic/duktig-http-factory-guzzle-adapter)
 [Symfony Router](https://github.com/symfony/routing) | [`duktig-symfony-router-adapter`](https://github.com/iuravic/duktig-symfony-router-adapter)
 [Symfony Event Dispatcher](https://github.com/symfony/event-dispatcher) | [`duktig-symfony-event-dispatcher-adapter`](https://github.com/iuravic/duktig-symfony-event-dispatcher-adapter)
+[Auryn DI container](https://github.com/rdlowrey/auryn) | [`duktig-auryn-adapter`](https://github.com/iuravic/duktig-auryn-adapter)
 [Monolog](https://github.com/Seldaek/monolog) | /
 [Middleman middleware dispatcher](https://github.com/mindplay-dk/middleman) | [`duktig-middleman-adapter`](https://github.com/iuravic/duktig-middleman-adapter)
 [Twig renderer](https://github.com/twigphp/Twig) | [`duktig-twig-adapter`](https://github.com/iuravic/duktig-twig-adapter)
