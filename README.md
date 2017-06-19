@@ -2,22 +2,45 @@
 
 The skeleton web application based on [`iuravic/duktig-core`](https://github.com/iuravic/duktig-core) package.
 
------------------------------------------------------------------------------------------
 
+# Table of contents
+- [About](#about)
+    - [duktig-core package](#duktig-core-package)
+- [Package design](#package-design)
+    - [Dependencies](#dependencies)
+    - [Core services](#core-services)
+- [Example project functionalities](#example-project-functionalities)
+- [Application flow](#application-flow)
+    - [index.php](#index-php)
+    - [AppFactory](#appfactory)
+    - [Request processing](#request-processing)
+- [Configuration](#configuration)
+    - [Configuration files](#configuration-files)
+    - [The configuration service](#the-configuration-service)
+    - [Registering services](#registering-services)
+    - [Middleware](#middleware)
+    - [Events](#events)
+    - [Routes](#routes)
+
+
+
+<a name="about"></a>
 ## About
 
 The `duktig-skeleton-web-app` is a starting point for developing your own applications with the Duktig framework. It is founded on the [`duktig-core`](https://github.com/iuravic/duktig-core) package, and it provides it with all its necessary dependencies. The skeleton application also contains functional examples of most of the Duktig framework's major features.
 
+<a name="duktig-core-package"></a>
 ### `duktig-core` package
 
 It is advisable to also inspect the [`duktig-core` documentation](https://github.com/iuravic/duktig-core) which describes the purpose and features of the Duktig framework, as well as explains its base elements and functionalities.
 
------------------------------------------------------------------------------------------
 
+<a name="package-design"></a>
 ## Package design
 
 Most of the Duktig's core services are fully decoupled from the [`duktig-core`](https://github.com/iuravic/duktig-core) package. The `duktig-core` simply describes them by its interfaces, and each of them is found as a separate package in the form of an adapter towards a readily available open-source project. This kind of approach provides high flexibility, reusability, and generally stands as a good package design.
 
+<a name="dependencies"></a>
 ### Dependencies
 
 The `duktig-skeleton-web-app` composes the full Duktig web application framework by using popular and tested open-source packages. Adapter packages are used simply to adapt the external packages' APIs to the core's interfaces, therefore making them usable by the [`duktig-core`](https://github.com/iuravic/duktig-core).
@@ -33,12 +56,14 @@ Project | Adapter package
 [Middleman middleware dispatcher](https://github.com/mindplay-dk/middleman) | [`duktig-middleman-adapter`](https://github.com/iuravic/duktig-middleman-adapter)
 [Twig renderer](https://github.com/twigphp/Twig) | [`duktig-twig-adapter`](https://github.com/iuravic/duktig-twig-adapter)
 
+<a name="core-services"></a>
 ### Core services
 
 The [`services.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) file shows how these packages are implemented and configured to provide for the core functionality.
 
------------------------------------------------------------------------------------------
 
+
+<a name="example-project-functionalities"></a>
 ## Example project functionalities
 
 Within this package several functionalities are implemented as simple show-case examples. These can be looked up for "how-tos", they can be modified, or simply removed from your project. Basically they should serve to show a quick way around building apps with the Duktig framework.
@@ -103,7 +128,6 @@ The [`ExampleIPService`](https://github.com/iuravic/duktig-skeleton-web-app/blob
 - the `ExampleIPService` itself is being resolved by the use of the container's automatic provisioning feature (notice that it was not specifically registered in the [`Config/services.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php), since the Auryn uses the feature)
 - dependency injection
 - access to the configuration service and config parameters
-
 ### Configuration
 
 The following configuration settings are implemented in the skeleton project:
@@ -115,20 +139,18 @@ The following configuration settings are implemented in the skeleton project:
 
 
 
-
------------------------------------------------------------------------------------------
-
+<a name="application-flow"></a>
 ## Application flow
 
 Let's take a look at a full request-to-response life-cycle, and some of its key elements, in the order in which they come up in the chain of command.
 
-
+<a name="index-php"></a>
 ### index.php
 
 A typical index.php file would look like this:
 
 ```php
-  <?php
+<?php
     require __DIR__.'/../vendor/autoload.php';
 
     $app = (new \Duktig\Core\AppFactory)->make(
@@ -141,7 +163,7 @@ A typical index.php file would look like this:
 
 We see that the app is created by the [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/AppFactory.php) by providing the custom configuration file and the application class.
 
-
+<a name="appfactory"></a>
 ### `AppFactory`
 
 The [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/AppFactory.php) creates an instance of the application by:
@@ -150,7 +172,7 @@ The [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/maste
 - instantiating and configuring the DI container through the use of the [`Duktig\Core\DI\ContainerFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/DI/ContainerFactory.php),
 - resolving the app with its dependencies.
 
-
+<a name="request-processing"></a>
 ### Request processing
 
 The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/Core/App.php)'s method `run()` is the entry point for the request. The framework "runs" the request through the full application stack. It employs HTTP middleware at its core and composes a middleware stack which consists of:
@@ -165,18 +187,19 @@ At the end of the middleware stack lies the [ControllerResponder](TODO) middlewa
 
 After finishing processing the response, the framework sends it to the browser and terminates the application business.
 
------------------------------------------------------------------------------------------
 
+
+<a name="configuration"></a>
 ## Configuration
 
 Before taking a final step and delving into the configuration, please take a moment to also look the [`duktig-core`](https://github.com/iuravic/duktig-core)'s own documentation and the framework project description.
 
-
+<a name="configuration-files"></a>
 ### Configuration files
 
 Duktig's configuration is contained within the simple [`.php` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's `Config` folder should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all thhe config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
 
-
+<a name="the-configuration-service"></a>
 ### The configuration service
 
 The configuration service is used to access the configuration parameters and values, that is the contents of the `config.php` file. It implements a simple API given by the `Duktig\Core\Config\ConfigInterface`.
@@ -185,10 +208,10 @@ It can be accessed via dependency injection, where it is type-hinted as the `Con
 
 The configuration service is a shared service, meaning that its instantiation will not return a blank instance, but an already configured value object.
 
-
+<a name="registering-services"></a>
 ### Registering services
 
-Services are registered in the `Config/services.php` file in your app folder. This file must return a closure which gets the container as it's argument, and returns it after configuring it.
+Services are registered in the `Config/services.php` file in your app folder. This file must return a closure which gets the container as it's argument, and returns it after configuring it:
 
 ```php
 <?php
@@ -199,7 +222,7 @@ return function($container) {
 ```
 
 
-
+<a name="middleware"></a>
 ### Middleware
 
 Duktig uses the "single-pass" [PSR-15](http://www.php-fig.org/psr/) compatible middleware and its dispatching system. Two different middleware types exist within the framework.
@@ -233,6 +256,7 @@ return [
 ```
 
 
+<a name="events"></a>
 ### Events
 
 Events and listeners can be registered either programatically or by using the configuration.
@@ -243,7 +267,6 @@ To register events and their listeners, the `Config/events.php` file in your app
 
 ```php
 <?php
-/* Config/events.php */
 return [
     \MyProject\Event\EventIPInRange::class => [
         \MyProject\Event\ListenerReportIP::class,
@@ -268,22 +291,22 @@ In case the event is determined only by its unique name, and holds no specific c
 To attach listeners programatically, we use the event dispatcher's API defined by the `Duktig\Core\Event\Dispatcher\EventDispatcherInterface`. The following example registers the same events and listeners as the previous example where the configuration file is used:
 
 ```php
-<?php
-    $eventDispatcher->addListener(
-        \MyProject\Event\EventIPInRange::class,
-        \MyProject\Event\ListenerReportIP::class
-    );
-    $eventDispatcher->addListener(
-        'custom-event-name',
-        function($event) {
-            // ...
-        }
-    );
+$eventDispatcher->addListener(
+    \MyProject\Event\EventIPInRange::class,
+    \MyProject\Event\ListenerReportIP::class
+);
+$eventDispatcher->addListener(
+    'custom-event-name',
+    function($event) {
+        // ...
+    }
+);
 ```
 
 Custom listeners can be added to the [core events](https://github.com/iuravic/duktig-core/blob/master/src/Config/events.php) in the same way, therefore tapping access to the framework's internal check-points.
 
 
+<a name="routes"></a>
 ### Routes
 
 Routes are defined in the `Config/route.php` file. Since Duktig's [route model](https://github.com/iuravic/duktig-core/blob/master/src/Core/Route/Route.php) is heavily influenced by the Symfony's route model, it's elements match it quite closely.
