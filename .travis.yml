@@ -4,3 +4,11 @@ php:
 before_script:
   - composer self-update
   - composer install
+install:
+  - composer require satooshi/php-coveralls:~0.6@stable
+before_script:
+  - mkdir -p build/logs
+script:
+  - phpunit --coverage-clover build/logs/clover.xml
+after_success:
+  - sh -c 'php vendor/bin/coveralls -v;'
