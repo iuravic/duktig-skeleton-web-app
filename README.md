@@ -199,7 +199,7 @@ Before taking a final step and delving into the configuration, please take a mom
 <a name="configuration-files"></a>
 ## Configuration files
 
-Duktig's configuration is contained within the simple [`.php` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's `Config` folder should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all thhe config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
+Duktig's configuration is contained within the simple [`.php` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's `Config` folder should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all the config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
 
 <a name="the-configuration-service"></a>
 ## The configuration service
