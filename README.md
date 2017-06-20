@@ -73,7 +73,7 @@ Following is a quick list of available functionalities.
 
 ## Core services
 
-The [`'Config/services.php'`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) defines and registers all of the [core services](TODO) by using external packages.
+The [`'Config/services.php'`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) defines and registers all of the [core services](https://github.com/iuravic/duktig-core/blob/master/README.md#core-services) by using external packages.
 
 ## Routes
 
@@ -185,7 +185,7 @@ The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/C
 
 Two kinds of middleware exist in Duktig: the application middleware -- which is used on every request, and the route specific middleware -- which can be assigned to a specific route.
 
-At the end of the middleware stack lies the [ControllerResponder](TODO) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
+At the end of the middleware stack lies the [ControllerResponder](https://github.com/iuravic/duktig-core/blob/master/README.md#controllerresponder) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
 
 After finishing processing the response, the framework sends it to the browser and terminates the application business.
 
@@ -199,7 +199,7 @@ Before taking a final step and delving into the configuration, please take a mom
 <a name="configuration-files"></a>
 ## Configuration files
 
-Duktig's configuration is contained within the simple [`.php` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's `Config` folder should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all thhe config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
+Duktig's configuration is contained within the simple [`.php` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's `Config` folder should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all the config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
 
 <a name="the-configuration-service"></a>
 ## The configuration service
