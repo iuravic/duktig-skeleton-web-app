@@ -73,7 +73,7 @@ Following is a quick list of available functionalities.
 
 ## Core services
 
-The [`'Config/services.php'`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) defines and registers all of the [core services](TODO) by using external packages.
+The [`'Config/services.php'`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) defines and registers all of the [core services](https://github.com/iuravic/duktig-core/blob/master/README.md#core-services) by using external packages.
 
 ## Routes
 
@@ -185,7 +185,7 @@ The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/C
 
 Two kinds of middleware exist in Duktig: the application middleware -- which is used on every request, and the route specific middleware -- which can be assigned to a specific route.
 
-At the end of the middleware stack lies the [ControllerResponder](TODO) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
+At the end of the middleware stack lies the [ControllerResponder](https://github.com/iuravic/duktig-core/blob/master/README.md#controllerresponder) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
 
 After finishing processing the response, the framework sends it to the browser and terminates the application business.
 
