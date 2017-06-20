@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/iuravic/duktig-skeleton-web-app.svg?branch=master)](https://travis-ci.org/iuravic/duktig-skeleton-web-app)
+[![Build Status](https://travis-ci.org/iuravic/duktig-skeleton-web-app.svg?branch=master)](https://travis-ci.org/iuravic/duktig-skeleton-web-app) [![Coverage Status](https://coveralls.io/repos/github/iuravic/duktig-skeleton-web-app/badge.svg?branch=master)](https://coveralls.io/github/iuravic/duktig-skeleton-web-app?branch=master)
 
 # duktig-skeleton-web-app
 
