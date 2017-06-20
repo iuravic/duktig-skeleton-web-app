@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/iuravic/duktig-skeleton-web-app.svg?branch=master)](https://travis-ci.org/iuravic/duktig-skeleton-web-app)
+
 # duktig-skeleton-web-app
 
 The skeleton web application based on [`iuravic/duktig-core`](https://github.com/iuravic/duktig-core) package.
