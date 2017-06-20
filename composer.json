@@ -1,6 +1,6 @@
 {
     "name": "iuravic/duktig-skeleton-web-app",
-    "type": "library",
+    "type": "project",
     "description": "Skeleton web application with Duktig MVC micro web framework for PHP 7.1",
     "keywords": [
         "Duktig",
