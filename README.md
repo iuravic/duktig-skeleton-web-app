@@ -25,6 +25,7 @@ The skeleton web application based on [`iuravic/duktig-core`](https://github.com
     - [Middleware](#middleware)
     - [Events](#events)
     - [Routes](#routes)
+- [Tests](#tests)
 
 
 
@@ -372,6 +373,8 @@ return [
 The full list of route configuration parameters can be found in the [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file.
 
 
+
+<a name="tests"></a>
 # Tests
 
 This package demonstrates a high code coverage percentage using the PHPUnit and [Mockery](https://github.com/mockery/mockery). To run the tests at the command line, install the package as a new project with full dev requirements, and within the project directory run the command:
