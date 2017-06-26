@@ -78,7 +78,7 @@ The following command creates a new project via Composer:
 $ composer create-project -s dev iuravic/duktig-skeleton-web-app {$PROJECT_PATH}
 ```
 
-The Duktig packages' repositories are currently not tagged to corresponding versions, for which I appologize at this moment, but this command will never the less correctly resolve and fetch all the dependencies and install your project.
+The Duktig packages' repositories are currently not tagged to corresponding versions, for which I appologize at this moment, but this command will never the less correctly resolve and fetch all the dependencies and create your new project.
 
 
 
