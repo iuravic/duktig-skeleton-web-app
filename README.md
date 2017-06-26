@@ -370,3 +370,16 @@ return [
 ```
 
 The full list of route configuration parameters can be found in the [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file.
+
+
+# Tests
+
+This package demonstrates a high code coverage percentage using the PHPUnit and [Mockery](https://github.com/mockery/mockery). To run the tests at the command line, install the package as a new project with full dev requirements, and within the project directory run the command:
+
+```bash
+$ vendor/bin/phpunit -c phpunit.xml.dist
+```
+
+This will also generate a coverage report in the `coverage` directory within the project directory.
+
+These tests cover this project's [functional elements](#example-project-functionalities), while all the used packages are fully unit tested separately.
