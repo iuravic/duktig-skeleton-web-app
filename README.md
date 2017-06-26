@@ -11,14 +11,16 @@ The skeleton web application based on [`iuravic/duktig-core`](https://github.com
 - [Package design](#package-design)
     - [Dependencies](#dependencies)
     - [Core services](#core-services)
-- [Example project functionalities](#example-project-functionalities)
-- [Application flow](#application-flow)
+- [Install](#install)
+- [Usage and application flow](#usage-and-application-flow)
     - [index.php](#index-php)
     - [AppFactory](#appfactory)
     - [Request processing](#request-processing)
+- [Example project functionalities](#example-project-functionalities)
 - [Configuration](#configuration)
     - [Configuration files](#configuration-files)
     - [The configuration service](#the-configuration-service)
+    - [Implementing duktig-core's requirements](#implementing-duktig-cores-requirements)
     - [Registering services](#registering-services)
     - [Middleware](#middleware)
     - [Events](#events)
@@ -63,6 +65,69 @@ Project | Adapter package
 ## Core services
 
 The [`services.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) file shows how these packages are implemented and configured to provide for the core functionality.
+
+
+
+<a name="install"></a>
+# Install
+
+The following command creates a new project via Composer:
+
+```
+$ composer create-project -s dev iuravic/duktig-skeleton-web-app {$PROJECT_PATH}
+```
+
+The Duktig packages' repositories are currently not tagged to corresponding versions, for which I appologize at this moment, but this command will never the less correctly resolve and fetch all the dependencies and install your project.
+
+
+
+<a name="usage-and-application-flow"></a>
+# Usage and application flow
+
+Let's take a look at a full request-to-response life-cycle, and some of its key elements, in the order in which they come up in the chain of command.
+
+<a name="index-php"></a>
+## index.php
+
+A typical index.php file would look like this:
+
+```php
+<?php
+    require __DIR__.'/../vendor/autoload.php';
+
+    $app = (new \Duktig\Core\AppFactory)->make(
+        __DIR__.'/../src/Config/config.php',
+        \Duktig\Core\App::class
+    );
+
+    $app->run();
+```
+
+We see that the app is created by the [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/AppFactory.php) by providing the custom configuration file and the application class.
+
+<a name="appfactory"></a>
+## `AppFactory`
+
+The [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/AppFactory.php) creates an instance of the application by:
+
+- taking the user configuration and merging it with core configuration,
+- instantiating and configuring the DI container through the use of the [`Duktig\Core\DI\ContainerFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/DI/ContainerFactory.php),
+- resolving the app with its dependencies.
+
+<a name="request-processing"></a>
+## Request processing
+
+The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/Core/App.php)'s method `run()` is the entry point for the request. The framework "runs" the request through the full application stack. It employs HTTP middleware at its core and composes a middleware stack which consists of:
+
+- application middleware,
+- route middleware,
+- controller responder middleware.
+
+Two kinds of middleware exist in Duktig: the application middleware -- which is used on every request, and the route specific middleware -- which can be assigned to a specific route.
+
+At the end of the middleware stack lies the [ControllerResponder](https://github.com/iuravic/duktig-core/blob/master/README.md#controllerresponder) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
+
+After finishing processing the response, the framework sends it to the browser and terminates the application business.
 
 
 
@@ -142,57 +207,6 @@ The following configuration settings are implemented in the skeleton project:
 
 
 
-
-<a name="application-flow"></a>
-# Application flow
-
-Let's take a look at a full request-to-response life-cycle, and some of its key elements, in the order in which they come up in the chain of command.
-
-<a name="index-php"></a>
-## index.php
-
-A typical index.php file would look like this:
-
-```php
-<?php
-    require __DIR__.'/../vendor/autoload.php';
-
-    $app = (new \Duktig\Core\AppFactory)->make(
-        __DIR__.'/../src/Config/config.php',
-        \Duktig\Core\App::class
-    );
-
-    $app->run();
-```
-
-We see that the app is created by the [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/AppFactory.php) by providing the custom configuration file and the application class.
-
-<a name="appfactory"></a>
-## `AppFactory`
-
-The [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/AppFactory.php) creates an instance of the application by:
-
-- taking the user configuration and merging it with core configuration,
-- instantiating and configuring the DI container through the use of the [`Duktig\Core\DI\ContainerFactory`](https://github.com/iuravic/duktig-core/blob/master/src/Core/DI/ContainerFactory.php),
-- resolving the app with its dependencies.
-
-<a name="request-processing"></a>
-## Request processing
-
-The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/Core/App.php)'s method `run()` is the entry point for the request. The framework "runs" the request through the full application stack. It employs HTTP middleware at its core and composes a middleware stack which consists of:
-
-- application middleware,
-- route middleware,
-- controller responder middleware.
-
-Two kinds of middleware exist in Duktig: the application middleware -- which is used on every request, and the route specific middleware -- which can be assigned to a specific route.
-
-At the end of the middleware stack lies the [ControllerResponder](https://github.com/iuravic/duktig-core/blob/master/README.md#controllerresponder) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
-
-After finishing processing the response, the framework sends it to the browser and terminates the application business.
-
-
-
 <a name="configuration"></a>
 # Configuration
 
@@ -211,6 +225,11 @@ The configuration service is used to access the configuration parameters and val
 It can be accessed via dependency injection, where it is type-hinted as the `ConfigInterface`, which will then have the `Duktig\Core\Config\Config` service resolved in its place.
 
 The configuration service is a shared service, meaning that its instantiation will not return a blank instance, but an already configured value object.
+
+<a name="implementing-duktig-cores-requirements"></a>
+## Implementing duktig-core's requirements
+
+The `duktig-core` package's has [requirements](https://github.com/iuravic/duktig-core/blob/master/README.md#requirements) which must be implemented and provided in order to create a full-functioning application environment. Those [requirements](https://github.com/iuravic/duktig-core/blob/master/README.md#requirements) need to be implemented, and [registered](registering-services) with the container. The `duktig-skeleton-web-app` package already implements all those requirements; they are packaged separately (see chapter [dependencies](https://github.com/iuravic/duktig-skeleton-web-app#dependencies)) and already resolved as the project's [requirements](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/composer.json).
 
 <a name="registering-services"></a>
 ## Registering services
