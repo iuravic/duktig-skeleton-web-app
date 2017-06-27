@@ -2,7 +2,7 @@
 
 # duktig-skeleton-web-app
 
-This is a skeleton web application made with the Duktig micro MVC web framework, based on its core [`iuravic/duktig-core`](https://github.com/iuravic/duktig-core) package.
+This is a skeleton web application made with the Duktig micro MVC web framework written for PHP 7.1, based on its core [`iuravic/duktig-core`](https://github.com/iuravic/duktig-core) package.
 
 
 # Table of contents
