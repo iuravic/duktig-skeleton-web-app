@@ -283,7 +283,7 @@ return [
 <a name="events"></a>
 ## Events
 
-Events and listeners can be registered either programatically or by using the configuration.
+Events and listeners can be registered either by using the configuration or programmatically. Even though both mechanisms are available, it is a general recommendation to use configuration to define events and their listeners since the separation of configuration and code generally results in better factoring of the code. However this programming practice should be evaluated on a case-to-case basis.
 
 ### Registration via the config file
 
