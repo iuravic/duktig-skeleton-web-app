@@ -2,7 +2,7 @@
 
 # duktig-skeleton-web-app
 
-This is a skeleton web application made with the Duktig micro MVC web framework written for PHP 7.1, based on its core [`iuravic/duktig-core`](https://github.com/iuravic/duktig-core) package.
+This is a skeleton web application made with the Duktig micro MVC web framework written for PHP 7.1, based on [`iuravic/duktig-core`](https://github.com/iuravic/duktig-core) library.
 
 
 # Table of contents
@@ -32,7 +32,7 @@ This is a skeleton web application made with the Duktig micro MVC web framework 
 <a name="about"></a>
 # About
 
-The `duktig-skeleton-web-app` is a starting point for developing your own applications with the Duktig framework. It is founded on the [`duktig-core`](https://github.com/iuravic/duktig-core) package, and it provides it with all its necessary dependencies. The skeleton application also contains functional examples of most of the Duktig framework's major features.
+The `duktig-skeleton-web-app` is a starting point for developing your own applications with the Duktig framework. It is founded on the [`duktig-core`](https://github.com/iuravic/duktig-core) package, and it provides all its necessary dependencies. The skeleton application also contains functional examples of the Duktig framework's major features.
 
 <a name="duktig-core-package"></a>
 ## `duktig-core` package
@@ -43,7 +43,7 @@ It is advisable to also inspect the [`duktig-core` documentation](https://github
 <a name="package-design"></a>
 # Package design
 
-Most of the Duktig's core services are fully decoupled from the [`duktig-core`](https://github.com/iuravic/duktig-core) package. The `duktig-core` simply describes them by its interfaces, and each of them is found as a separate package in the form of an adapter towards a readily available open-source project. This kind of approach provides high flexibility, reusability, and generally stands as a good package design.
+Most of the Duktig's core services are fully decoupled from the [`duktig-core`](https://github.com/iuravic/duktig-core) package. The `duktig-core` simply describes them by defining its interfaces, and each of them is implemented as a separate package in the form of an adapter towards a readily available open-source project. This kind of approach provides high flexibility, reusability, and generally stands as a good package design.
 
 <a name="dependencies"></a>
 ## Dependencies
@@ -78,7 +78,7 @@ The following command creates a new project via Composer:
 $ composer create-project -s dev iuravic/duktig-skeleton-web-app {$PROJECT_PATH}
 ```
 
-The Duktig packages' repositories are currently not tagged to corresponding versions, for which I appologize at this moment, but this command will never the less correctly resolve and fetch all the dependencies and create your new project.
+The Duktig packages' repositories are currently not tagged to corresponding versions, for which I apologize at this moment, but this command will never the less correctly resolve and fetch all the dependencies and create your new project.
 
 
 
@@ -118,7 +118,7 @@ The [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/maste
 <a name="request-processing"></a>
 ## Request processing
 
-The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/Core/App.php)'s method `run()` is the entry point for the request. The framework "runs" the request through the full application stack. It employs HTTP middleware at its core and composes a middleware stack which consists of:
+The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/Core/App.php) is the framework's main class and its method `run()` is the entry point for the request. The framework "runs" the request through the full application stack. It employs HTTP middleware at its core and composes a middleware stack which consists of:
 
 - application middleware,
 - route middleware,
@@ -126,7 +126,7 @@ The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/C
 
 Two kinds of middleware exist in Duktig: the application middleware -- which is used on every request, and the route specific middleware -- which can be assigned to a specific route.
 
-At the end of the middleware stack lies the [ControllerResponder](https://github.com/iuravic/duktig-core/blob/master/README.md#controllerresponder) middleware. It is incharged of resolving the controller/route handler, and returning the response object from it to the stack.
+At the end of the middleware stack lies the [ControllerResponder](https://github.com/iuravic/duktig-core/blob/master/README.md#controllerresponder) middleware. It is in charged of resolving the controller/route handler, and returning the response object from it to the stack.
 
 After finishing processing the response, the framework sends it to the browser and terminates the application business.
 
@@ -135,9 +135,9 @@ After finishing processing the response, the framework sends it to the browser a
 <a name="example-project-functionalities"></a>
 # Example project functionalities
 
-Within this package several functionalities are implemented as simple show-case examples. These can be looked up for "how-tos", they can be modified, or simply removed from your project. Basically they should serve to show a quick way around building apps with the Duktig framework.
+Within this package several functionalities are implemented as simple show-case examples. These can be looked up as the "how-tos", they can be modified, or simply removed from your project. Basically they should serve to show a quick way around building apps with the Duktig framework.
 
-Following is a quick list of available functionalities.
+Following is a quick list of those functionalities.
 
 ## Core services
 
@@ -158,8 +158,8 @@ Path | Route | Features
 
 See controller directory [`Controller/`](https://github.com/iuravic/duktig-skeleton-web-app/tree/master/src/Controller).
 
-The `DuktigSkeleton\Controller\IndexController` features:
-- extension of the `BaseController` class
+The [`DuktigSkeleton\Controller\IndexController`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Controller/IndexController.php) features:
+- extension of the [`BaseController`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Controller/BaseController.php) class
 - constructor parameter resolution
 - use of external services
 - response definition
@@ -182,19 +182,19 @@ The following middlewares are implemented with their corresponding features:
 ## Events
 
 The event [`EventIPInRange`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Event/EventIPInRange.php) is a simple event object which shows how to:
-- extend the `EventAbstract` class
+- extend the [`EventAbstract`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/EventAbstract.php) class
 - use external services
 - represent contextual data for its listeners
 
 The `EventIPInRange` has one listener attached and registered via the [`Config/events.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/events.php) config file, the [`ListenerReportIP`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Event/ListenerReportIP.php), which demponstrates how to:
-- implement the `ListenerInterface`
+- implement the [`ListenerInterface`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/ListenerInterface.php)
 - use external services
 - handle the event object and perform a task
 
 ## Services
 
 The [`ExampleIPService`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Service/ExampleIPService.php) is a simple service which implements a few basic features:
-- the `ExampleIPService` itself is being resolved by the use of the container's automatic provisioning feature (notice that it was not specifically registered in the [`Config/services.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php), since the Auryn uses the feature)
+- the `ExampleIPService` itself is being resolved by the use of the container's automatic provisioning feature (notice that it was not specifically registered in the [`Config/services.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php), since the Auryn implements this feature)
 - dependency injection
 - access to the configuration service and config parameters
 
@@ -211,31 +211,31 @@ The following configuration settings are implemented in the skeleton project:
 <a name="configuration"></a>
 # Configuration
 
-Before taking a final step and delving into the configuration, please take a moment to also look the [`duktig-core`](https://github.com/iuravic/duktig-core)'s own documentation and the framework project description.
+Before taking a final step and looking into the configuration, please take a moment to also look the [`duktig-core`](https://github.com/iuravic/duktig-core)'s documentation.
 
 <a name="configuration-files"></a>
 ## Configuration files
 
-Duktig's configuration is contained within the simple [`.php` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's `Config` folder should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all the config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
+Duktig's configuration is contained within the simple [`'.php'` config files](https://github.com/iuravic/duktig-core/tree/master/src/Config) inside the `Config` directory. Your application's [`Config` folder](https://github.com/iuravic/duktig-skeleton-web-app/tree/master/src/Config) should mirror the contents of the `duktig-core`'s config. The core's and your application's configurations get fully merged at runtime, and all the config values defined in your application overwrite those from the core's. The only exception to this is the `services.php` file whose content is not overwritten, but merged with your application's `services.php`. In order to skip the core's services configuration, the config parameter `'skipCoreServices'` can be used.
 
 <a name="the-configuration-service"></a>
 ## The configuration service
 
-The configuration service is used to access the configuration parameters and values, that is the contents of the `config.php` file. It implements a simple API given by the `Duktig\Core\Config\ConfigInterface`.
+The configuration service is used to access the configuration parameters and values, that is the contents of the `config.php` file. It implements a simple API given by the [`Duktig\Core\Config\ConfigInterface`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Config/ConfigInterface.php).
 
-It can be accessed via dependency injection, where it is type-hinted as the `ConfigInterface`, which will then have the `Duktig\Core\Config\Config` service resolved in its place.
+It can be accessed via dependency injection, where it is type-hinted as the `ConfigInterface`, which will then have the [`Duktig\Core\Config\Config`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Config/Config.php) service resolved in its place.
 
 The configuration service is a shared service, meaning that its instantiation will not return a blank instance, but an already configured value object.
 
 <a name="implementing-duktig-cores-requirements"></a>
 ## Implementing duktig-core's requirements
 
-The `duktig-core` package's has [requirements](https://github.com/iuravic/duktig-core/blob/master/README.md#requirements) which must be implemented and provided in order to create a full-functioning application environment. Those [requirements](https://github.com/iuravic/duktig-core/blob/master/README.md#requirements) need to be implemented, and [registered](registering-services) with the container. The `duktig-skeleton-web-app` package already implements all those requirements; they are packaged separately (see chapter [dependencies](https://github.com/iuravic/duktig-skeleton-web-app#dependencies)) and already resolved as the project's [requirements](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/composer.json).
+The `duktig-core` package's has [requirements](https://github.com/iuravic/duktig-core/blob/master/README.md#requirements) which must be implemented and provided in order to create a full-functioning application environment. Those requirements need to be implemented, and [registered](registering-services) with the container. The `duktig-skeleton-web-app` package already implements all those requirements; they are packaged separately (see chapter [dependencies](https://github.com/iuravic/duktig-skeleton-web-app#dependencies)) and already resolved as the project's [requirements](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/composer.json).
 
 <a name="registering-services"></a>
 ## Registering services
 
-Services are registered in the `Config/services.php` file in your app folder. This file must return a closure which gets the container as it's argument, and returns it after configuring it:
+Services are registered in the [`Config/services.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/services.php) file in your app folder. This file must return a closure which gets the container as it's argument, and returns it after configuring it:
 
 ```php
 <?php
@@ -253,7 +253,7 @@ Duktig uses the "single-pass" [PSR-15](http://www.php-fig.org/psr/) compatible m
 
 ### Application middleware
 
-The application middleware is one which is run with every request. It is the app-wide middleware, and is defined in the `Config/middleware.php` configuration file in your app's folder. This example shows two application middlewares being assigned:
+The application middleware is one which is run with every request. It is the app-wide middleware, and is defined in the [`Config/middleware.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/middlewares.php) configuration file in your app's folder. The next example shows two application middlewares being assigned:
 
 ```php
 <?php
@@ -265,7 +265,7 @@ return [
 
 ### Route middleware
 
-The route middleware is assigned to a specific route and is only run when that route is resolved. The route middleware is defined in your app's `Config/routes.php` file by using the `'middlewares'` route config parameter. This example shows one route specific middleware being assigned to the `'example-route'` route:
+The route middleware is assigned to a specific route and is only run when that route is resolved. The route middleware is defined in your app's [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file by using the `'middlewares'` route config parameter. This following example shows one route specific middleware being assigned to the `'example-route'` route:
 
 ```php
 <?php
@@ -283,11 +283,11 @@ return [
 <a name="events"></a>
 ## Events
 
-Events and listeners can be registered either by using the configuration or programmatically. Even though both mechanisms are available, it is a general recommendation to use configuration to define events and their listeners since the separation of configuration and code generally results in better factoring of the code. However this programming practice should be evaluated on a case-to-case basis.
+Events and listeners can be registered either by using the configuration or programmatically. Even though both mechanisms are available, it is a general recommendation to use configuration to define events and their listeners rather than the programmatic method since the separation of configuration and code generally results in better factoring of the code. However this programming practice should be evaluated on a case-to-case basis.
 
 ### Registration via the config file
 
-To register events and their listeners, the `Config/events.php` file in your app's directory is used. The following example shows registering two events with a listener each:
+To register events and their listeners, the [`Config/events.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/events.php) file in your app's directory is used. The following example shows registering two events with a listener each:
 
 ```php
 <?php
@@ -304,15 +304,15 @@ return [
 ];
 ```
 
-The first event exists as a standalone class and uses its fully qualified class name as the event's name. Its listener `ListenerReportIP` is defined as a standalone class as well. All such events with a class of their own must extend the `Duktig\Core\Event\EventAbstract` class. And all such listeners must implement the `Duktig\Core\Event\ListenerInterface`. Both the event and the listener are resolved by the container, and have their constructor dependencies injected.
+The first event exists as a standalone class and uses its fully qualified class name as the event's name. Its listener [`ListenerReportIP`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Event/ListenerReportIP.php) is defined as a standalone class as well. All such events with a class of their own must extend the [`Duktig\Core\Event\EventAbstract`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/EventAbstract.php) class. And all such listeners must implement the [`Duktig\Core\Event\ListenerInterface`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/ListenerInterface.php). Both the event and the listener are resolved by the container, and have their constructor dependencies injected.
 
 The second event is defined by a custom name, and has one closure-type listener assigned to it. The closure-type listener can be assigned to any event, be it a standalone class or an event with a custom name. This listener can take only one argument, the event, and does not get resolved by the container.
 
-In case the event is determined only by its unique name, and holds no specific contextual information for its listeners, it can be dispatched and instantiatiated as the special `Duktig\Core\Event\EventSimple` class. The `EventSimple` class creates an event on-the-fly requiring only its unique name.
+In case the event is determined only by its unique name, and holds no specific contextual information for its listeners, it can be dispatched and instantiatiated as the special [`Duktig\Core\Event\EventSimple`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/EventSimple.php) class. The `EventSimple` class creates an event on-the-fly requiring only its unique name.
 
 ### Programatic configuration
 
-To attach listeners programatically, we use the event dispatcher's API defined by the `Duktig\Core\Event\Dispatcher\EventDispatcherInterface`. The following example registers the same events and listeners as the previous example where the configuration file is used:
+To attach listeners programatically, we use the event dispatcher's API defined by the [`Duktig\Core\Event\Dispatcher\EventDispatcherInterface`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/Dispatcher/EventDispatcherInterface.php). The following example registers the same events and listeners as the previous example where the configuration file is used:
 
 ```php
 $eventDispatcher->addListener(
@@ -333,9 +333,9 @@ Custom listeners can be added to the [core events](https://github.com/iuravic/du
 <a name="routes"></a>
 ## Routes
 
-Routes are defined in the `Config/route.php` file. Since Duktig's [route model](https://github.com/iuravic/duktig-core/blob/master/src/Core/Route/Route.php) is heavily influenced by the Symfony's route model, it's elements match it quite closely.
+Routes are defined in the [`Config/route.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file. Since Duktig's [route model](https://github.com/iuravic/duktig-core/blob/master/src/Core/Route/Route.php) is heavily influenced by the Symfony's route model, it's elements match it quite closely.
 
-Here is an example of a route which takes an URI path parameter called `myParam`. The parameter gets passed as an argument to the `IndexController::exampleAction`. This route also has the `ExampleRouteMiddleware` assigned to it.
+Here is an example of a route which takes an URI path parameter called `myParam`. The parameter gets passed as an argument to the [`IndexController::exampleAction`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Controller/IndexController.php). In the following example the route also has an `ExampleRouteMiddleware` assigned to it.
 
 ```php
 <?php
@@ -351,7 +351,7 @@ return [
 ];
 ```
 
-Another example is a route with an optional trailing slash at the end, which uses a closure-type handler (the handler gets resolved by the container and it's arguments are injected):
+Let's take a look at another example with a route that gets an optional trailing slash at the end, and which uses a closure-type handler. This kind of route handler also gets resolved by the container and it's arguments will be resolved and injected:
 
 ```php
 <?php
@@ -370,14 +370,14 @@ return [
 ];
 ```
 
-The full list of route configuration parameters can be found in the [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file.
+The full list of route configuration parameters can be found in the  ´duktig-core´'s [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file.
 
 
 
 <a name="tests"></a>
 # Tests
 
-This package demonstrates a high code coverage percentage using the PHPUnit and [Mockery](https://github.com/mockery/mockery). To run the tests at the command line, install the package as a new project with full dev requirements, and within the project directory run the command:
+This package achieves a high code coverage percentage using the PHPUnit and [Mockery](https://github.com/mockery/mockery). To run its tests at the command line, install the package as a new project with full dev requirements, and within the project directory run the command:
 
 ```bash
 $ vendor/bin/phpunit -c phpunit.xml.dist
@@ -385,4 +385,4 @@ $ vendor/bin/phpunit -c phpunit.xml.dist
 
 This will also generate a coverage report in the `coverage` directory within the project directory.
 
-These tests cover this project's [functional elements](#example-project-functionalities), while all the used packages are fully unit tested separately.
+These tests cover the project's [functional elements](#example-project-functionalities), while all the othe packages that are used within it are fully unit tested separately.
