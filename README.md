@@ -15,7 +15,7 @@ This is a skeleton web application made with the Duktig micro MVC web framework 
 - [Usage and application flow](#usage-and-application-flow)
     - [index.php](#index-php)
     - [AppFactory](#appfactory)
-    - [Request processing](#request-processing)
+    - [Request processing and the App class](#request-processing)
 - [Example project functionalities](#example-project-functionalities)
 - [Configuration](#configuration)
     - [Configuration files](#configuration-files)
@@ -52,7 +52,7 @@ The `duktig-skeleton-web-app` composes the full Duktig web application framework
 
 The following projects and packages are used here to provide the full functionalities for Duktig framework:
 
-Project | Adapter package
+Project | Used adapter package
 --- | ---
 [Guzzle HTTP messages](https://github.com/guzzle/psr7) | [`duktig-http-factory-guzzle-adapter`](https://github.com/iuravic/duktig-http-factory-guzzle-adapter)
 [Symfony Router](https://github.com/symfony/routing) | [`duktig-symfony-router-adapter`](https://github.com/iuravic/duktig-symfony-router-adapter)
@@ -116,7 +116,7 @@ The [`Duktig\Core\AppFactory`](https://github.com/iuravic/duktig-core/blob/maste
 - resolving the app with its dependencies.
 
 <a name="request-processing"></a>
-## Request processing
+## Request processing and the `App` class
 
 The [`Duktig\Core\App`](https://github.com/iuravic/duktig-core/blob/master/src/Core/App.php) is the framework's main class and its method `run()` is the entry point for the request. The framework "runs" the request through the full application stack. It employs HTTP middleware at its core and composes a middleware stack which consists of:
 
@@ -253,7 +253,7 @@ Duktig uses the "single-pass" [PSR-15](http://www.php-fig.org/psr/) compatible m
 
 ### Application middleware
 
-The application middleware is one which is run with every request. It is the app-wide middleware, and is defined in the [`Config/middleware.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/middlewares.php) configuration file in your app's folder. The next example shows two application middlewares being assigned:
+The application middleware is one which is run with every request. It is the app-wide middleware, and is defined in the [`Config/middleware.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/middlewares.php) configuration file in your app's folder. The next example shows how two application middlewares can be assigned:
 
 ```php
 <?php
@@ -265,7 +265,7 @@ return [
 
 ### Route middleware
 
-The route middleware is assigned to a specific route and is only run when that route is resolved. The route middleware is defined in your app's [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file by using the `'middlewares'` route config parameter. This following example shows one route specific middleware being assigned to the `'example-route'` route:
+The route middleware is assigned to a specific route and is only run when that route is resolved. The route middleware is defined in your app's [`Config/routes.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file by using the `'middlewares'` route config parameter. This brief excerpt shows how one route specific middleware can be assigned to an `'example-route'` route:
 
 ```php
 <?php
@@ -287,7 +287,7 @@ Events and listeners can be registered either by using the configuration or prog
 
 ### Registration via the config file
 
-To register events and their listeners, the [`Config/events.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/events.php) file in your app's directory is used. The following example shows registering two events with a listener each:
+To register events and their listeners, the [`Config/events.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/events.php) file in your app's directory is used. The following example shows how two events can be registered with a listener each:
 
 ```php
 <?php
@@ -312,7 +312,7 @@ In case the event is determined only by its unique name, and holds no specific c
 
 ### Programatic configuration
 
-To attach listeners programatically, we use the event dispatcher's API defined by the [`Duktig\Core\Event\Dispatcher\EventDispatcherInterface`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/Dispatcher/EventDispatcherInterface.php). The following example registers the same events and listeners as the previous example where the configuration file is used:
+To attach listeners programatically, we use the event dispatcher's API defined by the [`Duktig\Core\Event\Dispatcher\EventDispatcherInterface`](https://github.com/iuravic/duktig-core/blob/master/src/Core/Event/Dispatcher/EventDispatcherInterface.php). The following example demonstrates registering the same two events and listeners as in [the previous example](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/README.md#registration-via-the-config-file) where the configuration file was used:
 
 ```php
 $eventDispatcher->addListener(
@@ -335,7 +335,7 @@ Custom listeners can be added to the [core events](https://github.com/iuravic/du
 
 Routes are defined in the [`Config/route.php`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Config/routes.php) file. Since Duktig's [route model](https://github.com/iuravic/duktig-core/blob/master/src/Core/Route/Route.php) is heavily influenced by the Symfony's route model, it's elements match it quite closely.
 
-Here is an example of a route which takes an URI path parameter called `myParam`. The parameter gets passed as an argument to the [`IndexController::exampleAction`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Controller/IndexController.php). In the following example the route also has an `ExampleRouteMiddleware` assigned to it.
+Here is an example of a route which takes an URI path parameter called `myParam`. The parameter gets passed as an argument to the [`IndexController::exampleAction`](https://github.com/iuravic/duktig-skeleton-web-app/blob/master/src/Controller/IndexController.php). In the following example the route gets an `ExampleRouteMiddleware` assigned to it.
 
 ```php
 <?php
